@@ -90,11 +90,12 @@ def create_verifier_resources(did_string):
     os.environ["DASHSCOPE_API_KEY"] = api_key
 
     try:
-        # 1. 只初始化一个 LLM 实例 (Verifier 的大脑)
+        # 1. 初始化 LLM - 从配置读取模型参数
+        llm_config = config.get("llm_config", {})
         shared_llm = ChatQwQ(
-            model="qwen-flash",
-            temperature=0.00,
-            base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
+            model=llm_config.get("verifier_model", "qwen-flash"),
+            temperature=llm_config.get("verifier_temperature", 0.00),
+            base_url=llm_config.get("base_url", "https://dashscope.aliyuncs.com/compatible-mode/v1")
         )
 
         # 2. 构建 Controller Chain (负责流程)

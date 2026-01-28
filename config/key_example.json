@@ -6,6 +6,13 @@
     "https://sepolia.gateway.tenderly.co"
   ],
     "qwq_api_key": "YOUR_API_KEY_HERE", 
+    "llm_config": {
+        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "holder_model": "qwen-plus",
+        "holder_temperature": 0.01,
+        "verifier_model": "qwen-flash",
+        "verifier_temperature": 0.00
+    },
     "accounts": {
         "master":{
             "address": "0x...",

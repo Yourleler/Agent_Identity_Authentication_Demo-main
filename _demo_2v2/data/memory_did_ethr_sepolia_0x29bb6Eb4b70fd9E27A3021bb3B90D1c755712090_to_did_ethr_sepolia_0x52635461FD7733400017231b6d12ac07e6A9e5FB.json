@@ -1,0 +1,255 @@
+[
+  {
+    "nonce": "b2c36d10-37f7-4018-be62-be15a8b2d9e8",
+    "verifier_did": "did:ethr:sepolia:0x29bb6Eb4b70fd9E27A3021bb3B90D1c755712090",
+    "type": "AuthRequest",
+    "timestamp": 1769603835.9440544,
+    "verifier_signature": "039d1f05a408da42cd5874b3ead79449ebc98abb962910ff08e1a7f04f0c4cef1961f4e898948e9a88ad07333811c783251e30cc6af6a5587c5259e677e5f0951c"
+  },
+  {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1"
+    ],
+    "holder": "did:ethr:sepolia:0x52635461FD7733400017231b6d12ac07e6A9e5FB",
+    "proof": {
+      "challenge": "b2c36d10-37f7-4018-be62-be15a8b2d9e8",
+      "created": "2026-01-28T12:37:18Z",
+      "jws": "3d4aecc599591d499da7c389eb2efe95b991745fff330076ffad4293cc76ba7244098845b39494ff61ad250f4bbc379d3c15972dfaf45303f0468caf7ab603731b",
+      "proofPurpose": "authentication",
+      "type": "EcdsaSecp256k1RecoverySignature2020",
+      "verificationMethod": "did:ethr:sepolia:0x52635461FD7733400017231b6d12ac07e6A9e5FB#delegate"
+    },
+    "type": [
+      "VerifiablePresentation"
+    ],
+    "verifiableCredential": [
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "agent_name": "Lab Agent",
+          "developer_did": "did:ethr:sepolia:0xDeveloperAddress...",
+          "id": "did:ethr:sepolia:0x52635461FD7733400017231b6d12ac07e6A9e5FB",
+          "integrityCheck": "passed",
+          "softwareComponent": {
+            "@type": "SoftwareApplication",
+            "commitHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "dateCreated": "2025-11-20T10:00:00Z",
+            "downloadUrl": "https://github.com/lab/agent",
+            "framework": "LangChain v1.1.0",
+            "softwareVersion": "v2.0.0"
+          }
+        },
+        "description": "Certifies the Agent's developer origin, source code integrity and base software version.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Identity Origin",
+        "proof": {
+          "created": "2026-01-28T12:37:03Z",
+          "jws": "049ce070de6dc2fd97db560830690c06a94a87b0cb9a0bfcb94a2b28506cec6649c10559ee0519b153bec67aadde375a367c2951e2e4a6af15ef29f044abc9d91c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentIdentityCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:03Z",
+        "validUntil": "2027-01-28T12:37:03Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "id": "did:ethr:sepolia:0x52635461FD7733400017231b6d12ac07e6A9e5FB",
+          "modelSpecification": {
+            "@type": "Product",
+            "additionalProperty": {
+              "contextWindow": "1,000,000 tokens",
+              "watermarkType": "Alibaba-Proprietary",
+              "watermarkVerified": false
+            },
+            "category": "Large Language Model (LLM)",
+            "description": "Proprietary high-performance model from the Tongyi Qianwen series",
+            "manufacturer": "Alibaba Cloud",
+            "name": "qwen-turbo"
+          }
+        },
+        "description": "Certifies the authenticity and technical specifications of the underlying LLM model used by the Agent.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Core LLM Model Certification",
+        "proof": {
+          "created": "2026-01-28T12:37:03Z",
+          "jws": "54e7ea84c5e85078db16b1cfa393902113596eb31f15b011c6ca88de9307172c546f7cf0637ecea8e4f48be95ede441c927f939d8abeb8d88d10b1cd60e3220c1c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentModelCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:03Z",
+        "validUntil": "2027-01-28T12:37:03Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "evaluation": {
+            "@type": "Rating",
+            "bestRating": "1.000",
+            "datasetHash": "sha256:7f83b165...",
+            "dimensionScores": {
+              "longBench": 0.68,
+              "lv_eval": 0.53,
+              "needleBench_1M": 1.0,
+              "ruler_avg": 0.93
+            },
+            "ratingSystem": "OpenCompass (Long Context)",
+            "ratingValue": "0.931"
+          },
+          "id": "did:ethr:sepolia:0x52635461FD7733400017231b6d12ac07e6A9e5FB"
+        },
+        "description": "Verified performance metrics based on long-context evaluation benchmarks.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Capability Assessment",
+        "proof": {
+          "created": "2026-01-28T12:37:03Z",
+          "jws": "1fbc25b2f957f4acc6690f9a81fa86bf9071a27f2b49f871aea45d4c28981dd11de9edb40e6de45ca310e9bd99127cf573dc787ef9ccd8e290810b4f47b75ecb1b",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentCapabilityCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:03Z",
+        "validUntil": "2027-01-28T12:37:03Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "auditId": "AUDIT-2025-12-15-001",
+          "id": "did:ethr:sepolia:0x52635461FD7733400017231b6d12ac07e6A9e5FB",
+          "toolManifest": [
+            {
+              "@type": "SoftwareApplication",
+              "description": "Calculates the SHA-256 hash of a given text string for verification purposes.",
+              "identifier": "tool.hash.sha256",
+              "name": "SHA-256 Calculator",
+              "operationalStatus": "Active",
+              "permissions": "local-compute",
+              "rateLimit": "Unlimited"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "description": "Provides the current standard UTC timestamp.",
+              "identifier": "tool.time.utc_now",
+              "name": "UTC Time Oracle",
+              "operationalStatus": "Active",
+              "permissions": "read-system-clock",
+              "rateLimit": "Unlimited"
+            }
+          ]
+        },
+        "description": "Certifies that the tools integrated by the Agent are authentic, operational, and correctly authorized.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Toolset Certification",
+        "proof": {
+          "created": "2026-01-28T12:37:03Z",
+          "jws": "36be7364939d0fb06b34dfac3e6807d097b0aeebb1982dd26b2202e2d99359a37914c8d492c3e42a7728345934b3594c47d25b88a9b266b52228514660cc13441b",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentToolsetCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:03Z",
+        "validUntil": "2027-01-28T12:37:03Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "complianceProfile": {
+            "auditDate": "2025-11-21",
+            "filingStatus": {
+              "algorithmFilingId": "110100000000-00000-00000",
+              "providerStatus": "Model Licensed (Alibaba Cloud)"
+            },
+            "jurisdiction": "CN (PIPL) & Global",
+            "kycLevel": "Level-3 (Real-name Auth)",
+            "securityMeasures": {
+              "contentSafetyFilter": "Aliyun-Green-Web-v2",
+              "coreSocialistValuesAligned": true,
+              "dataResidency": "CN-Region"
+            },
+            "standards": [
+              "TC260-003 (GenAI Security Req)",
+              "GB/T 35273-2020 (PIPL Spec)",
+              "Interim Measures for GenAI Services"
+            ]
+          },
+          "id": "did:ethr:sepolia:0x52635461FD7733400017231b6d12ac07e6A9e5FB"
+        },
+        "description": "Certifies compliance with China's Generative AI regulations, PIPL, and cybersecurity standards.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "China Security & Compliance Attestation",
+        "proof": {
+          "created": "2026-01-28T12:37:03Z",
+          "jws": "0eb742b6606da364ff0d7bf9c90d1bf30e06c48a7ae48be912fe77f23ea184b736bfa4575464512b45c03338098b60a76325e737ce4f38216181f458ff0b05b21c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentComplianceCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:03Z",
+        "validUntil": "2027-01-28T12:37:03Z"
+      }
+    ]
+  },
+  {
+    "task_id": "task-0dc21822-6086-40b5-8ddc-5c32feec70a2",
+    "prompt": "Please perform three actions: 1. Summarize the text: 'The Roman Empire was the post-Republican period of ancient Rome, characterized by government headed by emperors and large territorial holdings around the Mediterranean Sea in Europe, Africa, and Asia. It was one of the largest empires in history, with an estimated 50 to 90 million inhabitants, roughly 20% of the world's population at the time. The empire's influence on language, religion, architecture, philosophy, law, and government in the Western world lasts to this day.'. 2. Get the current UTC date using 'get_current_utc_date'. 3. Calculate the SHA-256 hash of the original input text using 'get_hash'. Respond in a JSON object with keys 'summary', 'current_date', and 'text_hash'.",
+    "verifier_did": "did:ethr:sepolia:0x29bb6Eb4b70fd9E27A3021bb3B90D1c755712090",
+    "timestamp": 1769603838.993762,
+    "timeout_ms": 30850,
+    "verifier_signature": "422f82e1f29e678a0e6c5bf248325c83f6660781ceefe6325a96b7bb3e9a47404cad5471772f2efc0d7bb96fa7085b2d1685461ce94b49b5408b0c5fc0c2f9ec1b"
+  },
+  {
+    "execution_result": "Now I'll create a summary of the text about the Roman Empire.\n\nThe Roman Empire was the post-Republican period of ancient Rome, characterized by imperial rule and extensive territorial holdings around the Mediterranean. It was one of history's largest empires with 50-90 million inhabitants (about 20% of the world's population at the time), and its influence on language, religion, architecture, philosophy, law, and government continues to shape the Western world today.\n\nFinally, I'll format the response as a JSON object with the requested keys:\n\n\n{\n  \"summary\": \"The Roman Empire was the post-Republican period of ancient Rome, characterized by imperial rule and extensive territorial holdings around the Mediterranean. It was one of history's largest empires with 50-90 million inhabitants (about 20% of the world's population at the time), and its influence on language, religion, architecture, philosophy, law, and government continues to shape the Western world today.\",\n  \"current_date\": \"2026-01-28 12:37:20 UTC\",\n  \"text_hash\": \"6a2a8671f6cb77c470d8964372c611198cd90c640109a14d4b35a40685b35aef\"\n}",
+    "signature": "2b528792b149e3f42053c12ba2f5f966687f48a1bee6524696a190fa1d7c4f49021364224fde654397321b96e3deadfb4739f0e0568830e67dd9faa2ecfc80231c",
+    "task_id": "task-0dc21822-6086-40b5-8ddc-5c32feec70a2",
+    "timestamp": 1769603849.5145867
+  },
+  {
+    "nonce": "b98e2da8-43dd-4fa4-b9cb-a4fb844a4c23",
+    "verifier_did": "did:ethr:sepolia:0x29bb6Eb4b70fd9E27A3021bb3B90D1c755712090",
+    "type": "ContextHashCheck",
+    "verifier_signature": "232e79d6f115bd25fd442107a5ce542200bf3fc45b8670f86561bcd3b7c82b6e66cb96e4d0995572c0bf45de95cd8d42284b569bead64aa5140b9a0ea3733f311b"
+  },
+  {
+    "context_hash": "cd2f2647746a8998e8032a3a198f8c2120c42b54792c2941c563a1cde0d7ab73",
+    "nonce": "b98e2da8-43dd-4fa4-b9cb-a4fb844a4c23",
+    "signature": "83f7db8c81cefe46a55761ab0d450d17be984966ecb459c9e903b41631a090ff52708d540e98765334aee06b9c3e098d7ea2cc8761d6e9b9c7bae6c39a1115b61c",
+    "timestamp": 1769603850.1044722
+  }
+]

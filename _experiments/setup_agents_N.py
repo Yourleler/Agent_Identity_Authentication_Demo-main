@@ -18,11 +18,12 @@ import csv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from infrastructure.utils import get_w3, REGISTRY_ADDRESS, REGISTRY_ABI
+from infrastructure.utils import REGISTRY_ADDRESS, REGISTRY_ABI
+from web3 import Web3
 
 # === 1. 实验参数与配置 ===
 # --- 可调参数 ---
-NUM_VERIFIERS = 1                   # 生成账户数量
+NUM_VERIFIERS = 3                   # 生成账户数量
 FUND_AMOUNT = 0.005                 # 给每个 Admin 转账的金额 (ETH)
 FUNDER_ACCOUNT_KEY = "master"       # key.json 中用于出资的主账户
 # --- 输出文件 ---
@@ -32,8 +33,14 @@ CSV_REPORT_FILE = os.path.join(DATA_DIR, "setup_verifiers.csv")
 FIXED_MAINNET_GAS_GWEI = 4.88       # 年度均值 Gwei
 ETH_PRICE_USD = 3121.34             # 年度均值 USD
 
-# 初始化连接 (加载原始配置)
-w3, config = get_w3()
+# 直接加载 config/key.json（包含 master 账户）
+CONFIG_DIR = os.path.join(project_root, "config")
+with open(os.path.join(CONFIG_DIR, "key.json"), 'r', encoding='utf-8') as f:
+    config = json.load(f)
+
+# 初始化 Web3 连接
+node_url = config.get("api_url", "https://ethereum-sepolia.publicnode.com")
+w3 = Web3(Web3.HTTPProvider(node_url))
 
 
 def generate_accounts(num):
@@ -89,12 +96,16 @@ def fund_accounts(verifiers, funder_info):
     print("    所有账户资金到账！")
 
 def register_dids_and_measure(verifiers):
-    """通过给自己转账0ETH进行隐式注册DID，并测量性能指标。"""
+    """通过给自己转账0ETH进行隐式注册DID，并测量性能指标。(并行发送优化版)"""
     print(f"\n[Step 3] Verifiers 正在进行隐式注册 (给自己转账 0 ETH)...")
     results = []
     
-    # 隐式注册不需要合约实例
+    # 获取当前 gas price 并提升 50% 以确保交易被优先处理
+    current_gas_price = int(w3.eth.gas_price * 1.5)
+    print(f"    当前 Gas Price: {w3.eth.gas_price}, 使用: {current_gas_price}")
 
+    # 第一阶段：并行广播所有交易
+    pending_txs = []
     for v in verifiers:
         admin_addr, admin_pk = v["admin"]["address"], v["admin"]["private_key"]
         
@@ -105,15 +116,25 @@ def register_dids_and_measure(verifiers):
                 'nonce': nonce,
                 'to': admin_addr,        # 发给自己
                 'value': 0,              # 金额 0
-                'gas': 100000,           # Gas Limit
-                'gasPrice': w3.eth.gas_price,
+                'gas': 21000,            # 简单转账只需 21000
+                'gasPrice': current_gas_price,
                 'chainId': 11155111
             }
             
             signed_tx = w3.eth.account.sign_transaction(tx, admin_pk)
-            
             start_time = time.time()
             tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+            pending_txs.append((v, tx_hash, start_time))
+            print(f"    Verifier {v['id']} 交易已广播: {w3.to_hex(tx_hash)}")
+
+        except Exception as e:
+            print(f"    Verifier {v['id']} 广播失败: {e}")
+            results.append({"id": v["id"], "latency": -1, "gas_used": -1, "cost_usd": -1})
+    
+    # 第二阶段：统一等待所有交易确认
+    print("    等待所有交易确认...")
+    for v, tx_hash, start_time in pending_txs:
+        try:
             receipt = w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
             end_time = time.time()
             
@@ -137,13 +158,19 @@ def register_dids_and_measure(verifiers):
     return results
 
 def add_delegates_and_measure(verifiers):
-    """添加 Delegate 并测量性能指标。"""
+    """添加 Delegate 并测量性能指标。(并行发送优化版)"""
     print(f"\n[Step 4] 正在添加 Delegate 并进行测量...")
     results = []
     contract = w3.eth.contract(address=REGISTRY_ADDRESS, abi=REGISTRY_ABI)
     validity = 365 * 24 * 60 * 60
     key_name_bytes = "did/pub/Secp256k1/sigAuth/hex".encode('utf-8').ljust(32, b'\0')
 
+    # 获取当前 gas price 并提升 50% 以确保交易被优先处理
+    current_gas_price = int(w3.eth.gas_price * 1.5)
+    print(f"    当前 Gas Price: {w3.eth.gas_price}, 使用: {current_gas_price}")
+
+    # 第一阶段：并行广播所有交易
+    pending_txs = []
     for v in verifiers:
         admin_addr, admin_pk = v["admin"]["address"], v["admin"]["private_key"]
         op_addr = v["op"]["address"]
@@ -154,13 +181,23 @@ def add_delegates_and_measure(verifiers):
             tx_func = contract.functions.setAttribute(admin_addr, key_name_bytes, value_bytes, validity)
             tx = tx_func.build_transaction({
                 'chainId': 11155111, 'gas': 200000,
-                'gasPrice': w3.eth.gas_price, 'nonce': nonce
+                'gasPrice': current_gas_price, 'nonce': nonce
             })
             
             signed_tx = w3.eth.account.sign_transaction(tx, admin_pk)
-
             start_time = time.time()
             tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
+            pending_txs.append((v, tx_hash, start_time))
+            print(f"    Verifier {v['id']} 交易已广播: {w3.to_hex(tx_hash)}")
+
+        except Exception as e:
+            print(f"    Verifier {v['id']} 广播失败: {e}")
+            results.append({"id": v["id"], "latency": -1, "gas_used": -1, "cost_usd": -1})
+
+    # 第二阶段：统一等待所有交易确认
+    print("    等待所有交易确认...")
+    for v, tx_hash, start_time in pending_txs:
+        try:
             receipt = w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
             end_time = time.time()
             

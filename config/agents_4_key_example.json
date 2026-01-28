@@ -1,47 +1,54 @@
 {
-    "api_url": "https://ethereum-sepolia.publicnode.com",
+    "api_url": "https://sepolia.infura.io/v3/YOUR_API_KEY_HERE",
     "api_url_pool": [
-    "https://ethereum-sepolia.publicnode.com",
-    "https://sepolia.drpc.org",
-    "https://sepolia.gateway.tenderly.co"
-  ],
-    "qwq_api_key": "YOUR_API_KEY_HERE",
+        "https://sepolia.infura.io/v3/YOUR_API_KEY_HERE",
+        "https://sepolia.drpc.org",
+        "https://sepolia.gateway.tenderly.co"
+    ],
+    "qwq_api_key": "YOUR_LLM_API_KEY_HERE",
+    "llm_config": {
+        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+        "holder_model": "qwen-plus",
+        "holder_temperature": 0.01,
+        "verifier_model": "qwen-flash",
+        "verifier_temperature": 0.0
+    },
     "accounts": {
         "issuer": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+            "private_key": "0xa3906bd91f7485c3501fcb319a2d53cc67dbdba2ce3e60ba9f37c6754fcddd36"
         },
         "agent_a_admin": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0xd455afC286b7212d8A38684a70494bd2CA9AED61",
+            "private_key": "0xc216f6eccf4459764fa1ad9d39ab2e1f350fb82e5133554e7da0670adc20f6bc"
         },
         "agent_a_op": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0xD350988F85D3E7C7Ff55EaB5863C72dd30122a0E",
+            "private_key": "0x64fc866825d61f4844042c88ec28c2360670929c4c435fd40defe4a27ea430bf"
         },
         "agent_b_admin": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0x6E4527B8bf0E55a3E67dCe87E6E7af3EcFD57e8b",
+            "private_key": "0xdff730103307acc7deefbf5e52f4d1bd95b44047ef45a602f90c434b5cdeb855"
         },
         "agent_b_op": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0xdD3FA30197bac2F783CB006EdD67CebDe7c9Af9b",
+            "private_key": "0x530d65749f6e3994c9b295ca760bfb591eedad3e24a9c14cc70f51fffd6a1982"
         },
         "agent_c_admin": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0xBd6F519d3d4D22220F584F3a5784E1A9f387EeCc",
+            "private_key": "0xb49b067abd8a3114c8c343e9ae0a4448f0225c55baea5681071ef6b87adb45cc"
         },
         "agent_c_op": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0xA33a530198D6E67d287c99d7E6F519D4F75CDB2B",
+            "private_key": "0x3ea5e16ae24a810f7dfe05422bf85a0412950212af2cca1610373053ca70f05f"
         },
         "agent_d_admin": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0xE5C57785b7F9BcC11D89464bcC0cAEc06f1Ab202",
+            "private_key": "0x98af134c90abec075436034973edc013516ddd287a8e3e395dcf4e339c57db2f"
         },
         "agent_d_op": {
-            "address": "0x...",
-            "private_key": "YOUR_PRIVATE_KEY_HERE"
+            "address": "0x1678D696F457AF5EE4B7A4b543d0e8eBFfa161C5",
+            "private_key": "0xbe1a62dc26ca80bdb2208b128d9988cebca39c0ea32e51d29ea6e98408a7c287"
         }
     }
 }

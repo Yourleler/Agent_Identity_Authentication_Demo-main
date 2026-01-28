@@ -66,7 +66,7 @@ def add_delegate_with_contract(admin_role: str, op_role: str):
             'from': admin_addr,
             'nonce': nonce,
             'gas': 200000,
-            'gasPrice': w3.eth.gas_price,
+            'gasPrice': w3.eth.gas_price*2,
             'chainId': 11155111 # Sepolia
         })
         

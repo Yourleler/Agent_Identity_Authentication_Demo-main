@@ -1,0 +1,255 @@
+[
+  {
+    "nonce": "695a3620-38fb-4611-94a0-6992dfbac9e8",
+    "verifier_did": "did:ethr:sepolia:0xE29B1853B88E408fb436361631eB6fe8688960ae",
+    "type": "AuthRequest",
+    "timestamp": 1769603835.9273698,
+    "verifier_signature": "e91ffdc3401c85a190fe1bf610543d0ab5c425053637a90ea35fd99fab95ea1d391b81fb7d3a1120192ed8561f060945884d66cc3f4f28047e298b5d7186abee1b"
+  },
+  {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1"
+    ],
+    "holder": "did:ethr:sepolia:0xFD016380E8e5fA73F8Fb8623fd9F7E8f14474ac9",
+    "proof": {
+      "challenge": "695a3620-38fb-4611-94a0-6992dfbac9e8",
+      "created": "2026-01-28T12:37:18Z",
+      "jws": "af4700e0e2de40166b31b95a33dc39457281d725dc6d13a14044027c3944f462459eba0edc8a523232084e756d45eea5fa7558c678b726537b54c457ac92380b1b",
+      "proofPurpose": "authentication",
+      "type": "EcdsaSecp256k1RecoverySignature2020",
+      "verificationMethod": "did:ethr:sepolia:0xFD016380E8e5fA73F8Fb8623fd9F7E8f14474ac9#delegate"
+    },
+    "type": [
+      "VerifiablePresentation"
+    ],
+    "verifiableCredential": [
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "agent_name": "Lab Agent",
+          "developer_did": "did:ethr:sepolia:0xDeveloperAddress...",
+          "id": "did:ethr:sepolia:0xFD016380E8e5fA73F8Fb8623fd9F7E8f14474ac9",
+          "integrityCheck": "passed",
+          "softwareComponent": {
+            "@type": "SoftwareApplication",
+            "commitHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "dateCreated": "2025-11-20T10:00:00Z",
+            "downloadUrl": "https://github.com/lab/agent",
+            "framework": "LangChain v1.1.0",
+            "softwareVersion": "v2.0.0"
+          }
+        },
+        "description": "Certifies the Agent's developer origin, source code integrity and base software version.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Identity Origin",
+        "proof": {
+          "created": "2026-01-28T12:37:04Z",
+          "jws": "e8ff694c3c0f4a004d673974d612c853d91c843d932752718c66d12dd13cde0152175152c583c4b3227a0fb428ad3e9705f73f3389a7c06bd7834c53cf57be601c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentIdentityCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:04Z",
+        "validUntil": "2027-01-28T12:37:04Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "id": "did:ethr:sepolia:0xFD016380E8e5fA73F8Fb8623fd9F7E8f14474ac9",
+          "modelSpecification": {
+            "@type": "Product",
+            "additionalProperty": {
+              "contextWindow": "1,000,000 tokens",
+              "watermarkType": "Alibaba-Proprietary",
+              "watermarkVerified": false
+            },
+            "category": "Large Language Model (LLM)",
+            "description": "Proprietary high-performance model from the Tongyi Qianwen series",
+            "manufacturer": "Alibaba Cloud",
+            "name": "qwen-turbo"
+          }
+        },
+        "description": "Certifies the authenticity and technical specifications of the underlying LLM model used by the Agent.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Core LLM Model Certification",
+        "proof": {
+          "created": "2026-01-28T12:37:04Z",
+          "jws": "58eb3928a97892eb047fb2a712eb30bb465b2448c34da32400d76e818e75340577ec519b210b1f63cc354e1f78419c9d68e1f865ad90f9bd33096dcb0e0bc5d01b",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentModelCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:04Z",
+        "validUntil": "2027-01-28T12:37:04Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "evaluation": {
+            "@type": "Rating",
+            "bestRating": "1.000",
+            "datasetHash": "sha256:7f83b165...",
+            "dimensionScores": {
+              "longBench": 0.68,
+              "lv_eval": 0.53,
+              "needleBench_1M": 1.0,
+              "ruler_avg": 0.93
+            },
+            "ratingSystem": "OpenCompass (Long Context)",
+            "ratingValue": "0.931"
+          },
+          "id": "did:ethr:sepolia:0xFD016380E8e5fA73F8Fb8623fd9F7E8f14474ac9"
+        },
+        "description": "Verified performance metrics based on long-context evaluation benchmarks.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Capability Assessment",
+        "proof": {
+          "created": "2026-01-28T12:37:04Z",
+          "jws": "d041e2dab358bd3b45393ab0d84d68b15dd892f951ecb11d2065e394a0cc2cee5fe25cfed0ef3d92eb6a0e3a04ddf9391bd9fa883aafaa2cad78d537aaa693c71b",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentCapabilityCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:04Z",
+        "validUntil": "2027-01-28T12:37:04Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "auditId": "AUDIT-2025-12-15-001",
+          "id": "did:ethr:sepolia:0xFD016380E8e5fA73F8Fb8623fd9F7E8f14474ac9",
+          "toolManifest": [
+            {
+              "@type": "SoftwareApplication",
+              "description": "Calculates the SHA-256 hash of a given text string for verification purposes.",
+              "identifier": "tool.hash.sha256",
+              "name": "SHA-256 Calculator",
+              "operationalStatus": "Active",
+              "permissions": "local-compute",
+              "rateLimit": "Unlimited"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "description": "Provides the current standard UTC timestamp.",
+              "identifier": "tool.time.utc_now",
+              "name": "UTC Time Oracle",
+              "operationalStatus": "Active",
+              "permissions": "read-system-clock",
+              "rateLimit": "Unlimited"
+            }
+          ]
+        },
+        "description": "Certifies that the tools integrated by the Agent are authentic, operational, and correctly authorized.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Toolset Certification",
+        "proof": {
+          "created": "2026-01-28T12:37:04Z",
+          "jws": "58f066e69e503bd8b873f2c97cc058930b7ca2d9c554681dbbc3858758e050d4336bafe5f9268c0195eaeb2bc806512eb575ef77fef8bd4da6707f186e65f10c1c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentToolsetCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:04Z",
+        "validUntil": "2027-01-28T12:37:04Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "complianceProfile": {
+            "auditDate": "2025-11-21",
+            "filingStatus": {
+              "algorithmFilingId": "110100000000-00000-00000",
+              "providerStatus": "Model Licensed (Alibaba Cloud)"
+            },
+            "jurisdiction": "CN (PIPL) & Global",
+            "kycLevel": "Level-3 (Real-name Auth)",
+            "securityMeasures": {
+              "contentSafetyFilter": "Aliyun-Green-Web-v2",
+              "coreSocialistValuesAligned": true,
+              "dataResidency": "CN-Region"
+            },
+            "standards": [
+              "TC260-003 (GenAI Security Req)",
+              "GB/T 35273-2020 (PIPL Spec)",
+              "Interim Measures for GenAI Services"
+            ]
+          },
+          "id": "did:ethr:sepolia:0xFD016380E8e5fA73F8Fb8623fd9F7E8f14474ac9"
+        },
+        "description": "Certifies compliance with China's Generative AI regulations, PIPL, and cybersecurity standards.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "China Security & Compliance Attestation",
+        "proof": {
+          "created": "2026-01-28T12:37:04Z",
+          "jws": "3dc22538252f7072ace079d44a25be4e74cc71bbe785855ae023db58f5d6be7b6bc246fe6bc060e092c67bbf87837123c9845a59836670299830272ee54079871c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentComplianceCredential"
+        ],
+        "validFrom": "2026-01-28T12:37:04Z",
+        "validUntil": "2027-01-28T12:37:04Z"
+      }
+    ]
+  },
+  {
+    "task_id": "task-fd928b8f-98bf-422c-b2ac-fe634f6f085a",
+    "prompt": "Please perform three actions: 1. Summarize the text: 'Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are programmed to think like humans and mimic their actions. The term may also be applied to any machine that exhibits traits associated with a human mind such as learning and problem-solving. As technology advances, previous benchmarks that defined AI are frequently removed from the definition as they become routine capabilities.'. 2. Get the current UTC date using 'get_current_utc_date'. 3. Calculate the SHA-256 hash of the original input text using 'get_hash'. Respond in a JSON object with keys 'summary', 'current_date', and 'text_hash'.",
+    "verifier_did": "did:ethr:sepolia:0xE29B1853B88E408fb436361631eB6fe8688960ae",
+    "timestamp": 1769603838.8739572,
+    "timeout_ms": 28250,
+    "verifier_signature": "abe65ed9c07f2045017bb7e7261439ff1c319bac06d9f47b5de1b4cdde6e0a714a2c28e81c23cc612f66c3feb6ee25bad08c838474f3822a89f7d5463054c7f91c"
+  },
+  {
+    "execution_result": "Now I'll create a summary of the text about Artificial Intelligence.\n\nThe text defines AI as the simulation of human intelligence in machines, highlighting that AI systems are programmed to think and act like humans. It emphasizes key capabilities such as learning and problem-solving, and notes an important characteristic of AI development: as technologies advance and become routine, they are often removed from the definition of AI.\n\nFinally, I'll format the response as a JSON object with the required keys:\n\n{\n  \"summary\": \"Artificial Intelligence (AI) is the simulation of human intelligence in machines, enabling them to think and act like humans. Key characteristics include learning and problem-solving capabilities. As technology advances, capabilities that were once considered AI often become routine and are subsequently excluded from the definition of AI.\",\n  \"current_date\": \"2026-01-28 12:37:20 UTC\",\n  \"text_hash\": \"f2048f85b9c68c6e38d8f0986449ac04bd5ac1285ba6d08b160e8f18d8f4cc14\"\n}",
+    "signature": "c893c6f92474820aa93327a3f8a0a8040ed4c9cf812b22b1f7ccfd560de485cd2c59809d04da27d17903fcdeb75d14eb65bad381a57e40e4ace9e3e7ee5483441c",
+    "task_id": "task-fd928b8f-98bf-422c-b2ac-fe634f6f085a",
+    "timestamp": 1769603848.2388947
+  },
+  {
+    "nonce": "68a06010-6234-42f8-85d5-fc7727beb4ef",
+    "verifier_did": "did:ethr:sepolia:0xE29B1853B88E408fb436361631eB6fe8688960ae",
+    "type": "ContextHashCheck",
+    "verifier_signature": "1393cc657e609fe77d6c7fba7c7fe944eba13c4a0fd811a8df64806b2aa92de5369043358970e3de6a78f4039cbf25e52d9423ebed429aaad27ed139df4938b21c"
+  },
+  {
+    "context_hash": "fbab93d9c4d8468baeaef16c620223079b4695452825e76f640a1433347e0e5b",
+    "nonce": "68a06010-6234-42f8-85d5-fc7727beb4ef",
+    "signature": "c0940ac737c9ff26f40a9f6711df02ce798aef196a6f96d80df854742e2e73245e1d5a66ca33f9de21c57ecf599be51ace913373d566f1ff677e528984f761ac1b",
+    "timestamp": 1769603848.8792186
+  }
+]

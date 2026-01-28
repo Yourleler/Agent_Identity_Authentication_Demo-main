@@ -87,8 +87,15 @@ def fund_accounts(agents, funder_info):
     print("    所有账户资金到账！")
 
 def register_dids(agents):
-    """通过给自己转账 0 ETH 进行隐式注册 DID"""
+    """通过给自己转账 0 ETH 进行隐式注册 DID (并行发送，统一等待)"""
     print(f"\n[Step 3] Agents 正在通过隐式方式注册 DID (自转账 0 ETH)...")
+    
+    # 获取当前 gas price 并提升 50% 以确保交易被优先处理
+    current_gas_price = int(w3.eth.gas_price * 1.5)
+    print(f"    当前 Gas Price: {w3.eth.gas_price}, 使用: {current_gas_price}")
+    
+    # 第一阶段：并行发送所有交易
+    pending_txs = []
     for agent in agents:
         admin_addr, admin_pk = agent["admin"]["address"], agent["admin"]["private_key"]
         
@@ -100,30 +107,43 @@ def register_dids(agents):
                 'nonce': nonce,
                 'to': admin_addr,        # 发给自己
                 'value': 0,              # 金额 0
-                'gas': 100000,            # Gas Limit
-                'gasPrice': w3.eth.gas_price,
+                'gas': 21000,            # 简单转账只需 21000
+                'gasPrice': current_gas_price,
                 'chainId': 11155111
             }
             
             signed_tx = w3.eth.account.sign_transaction(tx, admin_pk)
-            
             tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
-            w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
-            
-            print(f"    {agent['name']} 隐式注册成功")
+            pending_txs.append((agent['name'], tx_hash))
+            print(f"    {agent['name']} 交易已广播: {w3.to_hex(tx_hash)}")
 
         except Exception as e:
-            print(f"    {agent['name']} 注册失败: {e}")
+            print(f"    {agent['name']} 广播失败: {e}")
+    
+    # 第二阶段：统一等待所有交易确认
+    print("    等待所有交易确认...")
+    for name, tx_hash in pending_txs:
+        try:
+            w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
+            print(f"    {name} 隐式注册成功")
+        except Exception as e:
+            print(f"    {name} 注册失败: {e}")
             
     print("    DID 注册完成。")
 
 def add_delegates(agents):
-    """添加 Delegate"""
+    """添加 Delegate (并行发送，统一等待)"""
     print(f"\n[Step 4] 正在添加 Delegate (Op Key)...")
     contract = w3.eth.contract(address=REGISTRY_ADDRESS, abi=REGISTRY_ABI)
     validity = 365 * 24 * 60 * 60
     key_name_bytes = "did/pub/Secp256k1/sigAuth/hex".encode('utf-8').ljust(32, b'\0')
+    
+    # 获取当前 gas price 并提升 50% 以确保交易被优先处理
+    current_gas_price = int(w3.eth.gas_price * 1.5)
+    print(f"    当前 Gas Price: {w3.eth.gas_price}, 使用: {current_gas_price}")
 
+    # 第一阶段：并行发送所有交易
+    pending_txs = []
     for agent in agents:
         admin_addr, admin_pk = agent["admin"]["address"], agent["admin"]["private_key"]
         op_addr = agent["op"]["address"]
@@ -134,18 +154,25 @@ def add_delegates(agents):
             tx_func = contract.functions.setAttribute(admin_addr, key_name_bytes, value_bytes, validity)
             tx = tx_func.build_transaction({
                 'chainId': 11155111, 'gas': 200000,
-                'gasPrice': w3.eth.gas_price, 'nonce': nonce
+                'gasPrice': current_gas_price, 'nonce': nonce
             })
             
             signed_tx = w3.eth.account.sign_transaction(tx, admin_pk)
-
             tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
-            w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
-
-            print(f"    {agent['name']} 授权 OP 成功")
+            pending_txs.append((agent['name'], tx_hash))
+            print(f"    {agent['name']} 交易已广播: {w3.to_hex(tx_hash)}")
 
         except Exception as e:
-            print(f"    {agent['name']} 授权失败: {e}")
+            print(f"    {agent['name']} 广播失败: {e}")
+
+    # 第二阶段：统一等待所有交易确认
+    print("    等待所有交易确认...")
+    for name, tx_hash in pending_txs:
+        try:
+            w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
+            print(f"    {name} 授权 OP 成功")
+        except Exception as e:
+            print(f"    {name} 授权失败: {e}")
 
     print("    Delegate 添加完成。")
 
@@ -155,18 +182,8 @@ def save_keys_to_file(agents):
     """
     print(f"\n[Step 5] 保存账户密钥到 {KEY_OUTPUT_FILE} ...")
     
-    # 1. 按照要求构建固定的头部信息
-    output_data = {
-        "api_url": "https://ethereum-sepolia.publicnode.com",
-        "api_url_pool": [
-        "https://ethereum-sepolia.publicnode.com",
-        "https://sepolia.drpc.org",
-        "https://sepolia.gateway.tenderly.co"
-    ],
-        "qwq_api_key": "sk-33f249ef59a44c4eb9d99a80f0feacf5",
-        
-        "accounts": {}
-    }
+    # 1. 直接从 key.json 复制所有配置，只重置 accounts
+    output_data = {**config, "accounts": {}}
     # 从原配置文件(key.json)中读取 issuer 信息
     # 注意：config 是脚本开头通过 get_w3() 加载的全局变量
     if "issuer" in config["accounts"]:

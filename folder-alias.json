@@ -1,0 +1,47 @@
+{
+    "agents/holder/definition.py": {
+        "description": "定义 Agent B 的静态属性（DID、公钥）"
+    },
+    "_ops_services": {
+        "description": "Issuer (发证方) 负责给Agent发身份证/能力证"
+    },
+    "agents/holder": {
+        "description": "Holder (持证方/Agent B) (提供服务的 Agent，持有 VC)"
+    },
+    "agents/verifier": {
+        "description": "Verifier (验证方/Agent A): 使用服务的 Agent，验证 VC"
+    },
+    "agents/holder/runtime.py": {
+        "description": "Agent B 运行时的逻辑"
+    },
+    "infrastructure/wallet.py": {
+        "description": "封装了密钥管理、DID 解析、签名功能"
+    },
+    "infrastructure/validator.py": {
+        "description": "负责验证 VC/VP 的签名有效性"
+    },
+    "vc_schemas": {
+        "description": "定义了 VC (凭证) 的 JSON 结构"
+    },
+    "vc_schemas/vc1_Identity_Origin.json": {
+        "description": "基础身份"
+    },
+    "vc_schemas/vc3_Capability_Benchmark.json": {
+        "description": "能力凭证"
+    },
+    "_ops_services/issuer_server.py": {
+        "description": "模拟权威机构发证"
+    },
+    "_ops_services/register_did.py": {
+        "description": "模拟 DID 注册"
+    },
+    "_demo_2v2": {
+        "description": "具体的 2对2 交互演示"
+    },
+    "_demo_2v2/start_network.py": {
+        "description": "启动脚本"
+    },
+    "_experiments": {
+        "description": "性能测试脚本"
+    }
+}

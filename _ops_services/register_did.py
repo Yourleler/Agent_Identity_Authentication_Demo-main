@@ -53,7 +53,7 @@ def register_did_implicit(role_name: str):
             'to': address,           # 发给自己
             'value': 0,              # 金额 0
             'gas': 21000,            # 安全 Gas Limit 
-            'gasPrice': w3.eth.gas_price,
+            'gasPrice': w3.eth.gas_price*2,
             'chainId': 11155111      # Sepolia Chain ID
         }
         

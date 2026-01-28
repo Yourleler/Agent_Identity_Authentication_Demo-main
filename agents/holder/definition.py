@@ -112,12 +112,12 @@ def create_holder_agent(did_string):
     os.environ["DASHSCOPE_API_KEY"] = api_key
 
     try:
-        # 2. 初始化 LLM
-        # 使用较低的 temperature (0.01) 保证决策的一致性和严谨性
+        # 2. 初始化 LLM - 从配置读取模型参数
+        llm_config = config.get("llm_config", {})
         llm = ChatQwQ(
-            model="qwen-plus",
-            temperature=0.01,
-            base_url="https://dashscope.aliyuncs.com/compatible-mode/v1"
+            model=llm_config.get("holder_model", "qwen-plus"),
+            temperature=llm_config.get("holder_temperature", 0.01),
+            base_url=llm_config.get("base_url", "https://dashscope.aliyuncs.com/compatible-mode/v1")
         )
 
         # 3. 设置短时记忆 (Conversation Buffer)

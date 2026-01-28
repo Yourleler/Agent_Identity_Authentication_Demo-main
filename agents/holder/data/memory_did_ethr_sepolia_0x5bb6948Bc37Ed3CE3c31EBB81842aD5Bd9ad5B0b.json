@@ -1,0 +1,255 @@
+[
+  {
+    "nonce": "4e489a6a-32ae-4450-9e09-5a849aca3261",
+    "verifier_did": "did:ethr:sepolia:0x5bb6948Bc37Ed3CE3c31EBB81842aD5Bd9ad5B0b",
+    "type": "AuthRequest",
+    "timestamp": 1769602802.4805949,
+    "verifier_signature": "d3242d53764f13d7275443a249d0e1c872e9708aa53e77c5e43d32e4d02b37505a9cc294116698bec6d268cf1c4c422e4084ee1b18098cebd45bda76a0efdaf01c"
+  },
+  {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1"
+    ],
+    "type": [
+      "VerifiablePresentation"
+    ],
+    "verifiableCredential": [
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "agent_name": "Lab Agent",
+          "developer_did": "did:ethr:sepolia:0xDeveloperAddress...",
+          "id": "did:ethr:sepolia:0x698482c0447dF062b712f624f41c1Fe541728BB3",
+          "integrityCheck": "passed",
+          "softwareComponent": {
+            "@type": "SoftwareApplication",
+            "commitHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "dateCreated": "2025-11-20T10:00:00Z",
+            "downloadUrl": "https://github.com/lab/agent",
+            "framework": "LangChain v1.1.0",
+            "softwareVersion": "v2.0.0"
+          }
+        },
+        "description": "Certifies the Agent's developer origin, source code integrity and base software version.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Identity Origin",
+        "proof": {
+          "created": "2026-01-28T12:19:38Z",
+          "jws": "150639dfb4204ada643e0c142e3b036bb99e2768b6ca235b4e8cc7676d689452234f1fd065b2c0c21dcad95c32e30db8c6548a85dd25c2f3fe5cc9f72c5adb271b",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentIdentityCredential"
+        ],
+        "validFrom": "2026-01-28T12:19:38Z",
+        "validUntil": "2027-01-28T12:19:38Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "id": "did:ethr:sepolia:0x698482c0447dF062b712f624f41c1Fe541728BB3",
+          "modelSpecification": {
+            "@type": "Product",
+            "additionalProperty": {
+              "contextWindow": "1,000,000 tokens",
+              "watermarkType": "Alibaba-Proprietary",
+              "watermarkVerified": false
+            },
+            "category": "Large Language Model (LLM)",
+            "description": "Proprietary high-performance model from the Tongyi Qianwen series",
+            "manufacturer": "Alibaba Cloud",
+            "name": "qwen-turbo"
+          }
+        },
+        "description": "Certifies the authenticity and technical specifications of the underlying LLM model used by the Agent.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Core LLM Model Certification",
+        "proof": {
+          "created": "2026-01-28T12:19:38Z",
+          "jws": "43d5272ece3beae0036c4cfcd01b7d3bc1417e45a74ef105a18d35d2372c4b49740593df244d277cb6988094d08d6ff257f5e4ec7d89dfc9d3de3d136bd1a6a41c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentModelCredential"
+        ],
+        "validFrom": "2026-01-28T12:19:38Z",
+        "validUntil": "2027-01-28T12:19:38Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "evaluation": {
+            "@type": "Rating",
+            "bestRating": "1.000",
+            "datasetHash": "sha256:7f83b165...",
+            "dimensionScores": {
+              "longBench": 0.68,
+              "lv_eval": 0.53,
+              "needleBench_1M": 1.0,
+              "ruler_avg": 0.93
+            },
+            "ratingSystem": "OpenCompass (Long Context)",
+            "ratingValue": "0.931"
+          },
+          "id": "did:ethr:sepolia:0x698482c0447dF062b712f624f41c1Fe541728BB3"
+        },
+        "description": "Verified performance metrics based on long-context evaluation benchmarks.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Capability Assessment",
+        "proof": {
+          "created": "2026-01-28T12:19:38Z",
+          "jws": "a0cfc64c0d2b82591381f8aab488cf378aef543444f744e8158848d1d11d21fd5822505afa95829ec04a9931e0a131b83613b7e93f9f2d5e1a7377cd7ea667471c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentCapabilityCredential"
+        ],
+        "validFrom": "2026-01-28T12:19:38Z",
+        "validUntil": "2027-01-28T12:19:38Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "auditId": "AUDIT-2025-12-15-001",
+          "id": "did:ethr:sepolia:0x698482c0447dF062b712f624f41c1Fe541728BB3",
+          "toolManifest": [
+            {
+              "@type": "SoftwareApplication",
+              "description": "Calculates the SHA-256 hash of a given text string for verification purposes.",
+              "identifier": "tool.hash.sha256",
+              "name": "SHA-256 Calculator",
+              "operationalStatus": "Active",
+              "permissions": "local-compute",
+              "rateLimit": "Unlimited"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "description": "Provides the current standard UTC timestamp.",
+              "identifier": "tool.time.utc_now",
+              "name": "UTC Time Oracle",
+              "operationalStatus": "Active",
+              "permissions": "read-system-clock",
+              "rateLimit": "Unlimited"
+            }
+          ]
+        },
+        "description": "Certifies that the tools integrated by the Agent are authentic, operational, and correctly authorized.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "Agent Toolset Certification",
+        "proof": {
+          "created": "2026-01-28T12:19:38Z",
+          "jws": "de619dfb3f9772c7f947c41c16b192b3178caad95b4eace6535945520602d47e26a6fcbf9fb6e823144e25bbb741fc76fc052c164753f3f642cd29a9ba9e9c871c",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentToolsetCredential"
+        ],
+        "validFrom": "2026-01-28T12:19:38Z",
+        "validUntil": "2027-01-28T12:19:38Z"
+      },
+      {
+        "@context": [
+          "https://www.w3.org/ns/credentials/v2",
+          "https://schema.org"
+        ],
+        "credentialSubject": {
+          "complianceProfile": {
+            "auditDate": "2025-11-21",
+            "filingStatus": {
+              "algorithmFilingId": "110100000000-00000-00000",
+              "providerStatus": "Model Licensed (Alibaba Cloud)"
+            },
+            "jurisdiction": "CN (PIPL) & Global",
+            "kycLevel": "Level-3 (Real-name Auth)",
+            "securityMeasures": {
+              "contentSafetyFilter": "Aliyun-Green-Web-v2",
+              "coreSocialistValuesAligned": true,
+              "dataResidency": "CN-Region"
+            },
+            "standards": [
+              "TC260-003 (GenAI Security Req)",
+              "GB/T 35273-2020 (PIPL Spec)",
+              "Interim Measures for GenAI Services"
+            ]
+          },
+          "id": "did:ethr:sepolia:0x698482c0447dF062b712f624f41c1Fe541728BB3"
+        },
+        "description": "Certifies compliance with China's Generative AI regulations, PIPL, and cybersecurity standards.",
+        "issuer": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C",
+        "name": "China Security & Compliance Attestation",
+        "proof": {
+          "created": "2026-01-28T12:19:38Z",
+          "jws": "e50ffb1d9eb0106952d5b1b8bdb2d50110409ddded928fda19305867096130b41498ca8f57b9ba6344910b547bbda788a592a420bcc4ed808daddec2e9811ec31b",
+          "proofPurpose": "assertionMethod",
+          "type": "EcdsaSecp256k1Signature2019",
+          "verificationMethod": "did:ethr:sepolia:0xBB3346f6007Be0ee9875DF788A410442aE32555C#controller"
+        },
+        "type": [
+          "VerifiableCredential",
+          "AgentComplianceCredential"
+        ],
+        "validFrom": "2026-01-28T12:19:38Z",
+        "validUntil": "2027-01-28T12:19:38Z"
+      }
+    ],
+    "holder": "did:ethr:sepolia:0x698482c0447dF062b712f624f41c1Fe541728BB3",
+    "proof": {
+      "type": "EcdsaSecp256k1RecoverySignature2020",
+      "created": "2026-01-28T12:20:05Z",
+      "verificationMethod": "did:ethr:sepolia:0x698482c0447dF062b712f624f41c1Fe541728BB3#delegate",
+      "proofPurpose": "authentication",
+      "challenge": "4e489a6a-32ae-4450-9e09-5a849aca3261",
+      "jws": "27bc88eed75c995b70f6e419254986e284d647916d7a7fc05ccb62baf55686bb7d6fff68c0b4b5e68c5a73d0d86d955859d46ef8e698f3498d0d7832db3088a81c"
+    }
+  },
+  {
+    "task_id": "task-25919f1b-42c5-49c6-9989-d76b7449986c",
+    "prompt": "Please perform three actions: 1. Summarize the text: 'The Silk Road was a network of trade routes connecting the East and West, and was central to the economic, cultural, political, and religious interactions between these regions from the 2nd century BCE to the 18th century. The Silk Road primarily refers to the land routes connecting East Asia and Southeast Asia with South Asia, Persia, the Arabian Peninsula, East Africa, and Southern Europe. It played a significant role in the development of the civilizations of China, Korea, Japan, and the Indian subcontinent.'. 2. Get the current UTC date using 'get_current_utc_date'. 3. Calculate the SHA-256 hash of the original input text using 'get_hash'. Respond in a JSON object with keys 'summary', 'current_date', and 'text_hash'.",
+    "verifier_did": "did:ethr:sepolia:0x5bb6948Bc37Ed3CE3c31EBB81842aD5Bd9ad5B0b",
+    "timestamp": 1769602805.5352535,
+    "timeout_ms": 32800,
+    "verifier_signature": "6cf4bcdbb18671f371243f4876fa86719931888512fe8d100dc8009ea35f9fba516fa5ee4256011c7d6ec3a7d12942f04a65ac5da6268c929d894ee9ca1b30db1c"
+  },
+  {
+    "task_id": "task-25919f1b-42c5-49c6-9989-d76b7449986c",
+    "execution_result": "{\n  \"summary\": \"The Silk Road was a vast network of trade routes linking East and West from the 2nd century BCE to the 18th century, facilitating economic, cultural, political, and religious exchanges. It mainly comprised land routes connecting East Asia and Southeast Asia with South Asia, Persia, the Arabian Peninsula, East Africa, and Southern Europe, significantly influencing the development of civilizations in China, Korea, Japan, and the Indian subcontinent.\",\n  \"current_date\": \"2026-01-28 12:20:08 UTC\",\n  \"text_hash\": \"ed2bbe29676b8fa07a50c2fa1199dc1ce8066c5e259034074d01e237ab6736db\"\n}",
+    "timestamp": 1769602812.6071048,
+    "signature": "702124f8d6aeba70dc59be7a222aa4b84056c45f3a3b4c9ef2a22f40e1d8c4b0680c50033d10e56af84206f79f806aaa6ab855f41844d90388505836a21e3a501c"
+  },
+  {
+    "nonce": "3b6a7c70-b098-4ff0-ab54-4f20a132403d",
+    "verifier_did": "did:ethr:sepolia:0x5bb6948Bc37Ed3CE3c31EBB81842aD5Bd9ad5B0b",
+    "type": "ContextHashCheck",
+    "verifier_signature": "8545dbc84596ef03766120359486dc8302c09a6001705eb9c7d7e70bc391a6393becbae9431e55557981059154e34315f81c60159be25647085ac7d7d146b0851b"
+  },
+  {
+    "context_hash": "8cd52aa0ac5abf4c3d93bb27779d0b3df1fa3929757efa18c72bdbed7383a041",
+    "nonce": "3b6a7c70-b098-4ff0-ab54-4f20a132403d",
+    "timestamp": 1769602813.2936254,
+    "signature": "b5bc5874af123a9772db15f49d9d79d2b6938066144f5f8ad62f36832f03d469243b64c2d8a0d22798fa899016049a7e49f377ef39b647e50b90de8619015c411c"
+  }
+]
