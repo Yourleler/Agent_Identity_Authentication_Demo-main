@@ -15,3 +15,10 @@ paper.md
 融合版Agent发现与治理架构总结v2.md
 .agent/rules/learn.md
 .vscode/settings.json
+artifacts/
+cache/
+合约AgentRegistry_v1.0.txt
+hardhat.config.js
+package-lock.json
+package.json
+scripts/verify.js
