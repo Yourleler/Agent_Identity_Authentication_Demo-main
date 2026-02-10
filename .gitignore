@@ -1,6 +1,50 @@
-key.json
-__pycache__/
+# Node.js
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Hardhat
+artifacts/
+cache/
+coverage/
+coverage.json
+typechain/
+typechain-types/
+
+# The Graph
+agent_subgraph/**/generated/
+agent_subgraph/**/build/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# General
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor directories and files
+.idea
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# Python (if mixed project)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Project Specific (Preserved from your original)
+key.json
 test/verifiers_key.json
 test/holders_key.json
 README_AI.txt
@@ -14,11 +58,4 @@ data/setup_verifiers.csv
 paper.md
 融合版Agent发现与治理架构总结v2.md
 .agent/rules/learn.md
-.vscode/settings.json
-artifacts/
-cache/
 合约AgentRegistry_v1.0.txt
-hardhat.config.js
-package-lock.json
-package.json
-scripts/verify.js

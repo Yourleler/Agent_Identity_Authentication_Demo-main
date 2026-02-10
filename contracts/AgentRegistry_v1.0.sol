@@ -47,7 +47,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
         string metadataCid; // IPFS CID (Service Metadata)
         uint256 initScore; // S_init
         uint256 accumulatedPenalty; // P_total
-        uint256 lastMisconductTimestamp; // T_last
+        uint256 lastMisconductTimestamp; // T_last ((格式)Unix时间戳, (单位)second)
         uint256 stakeAmount; // 当前质押（wei）
         bool isSlashed; // 是否被罚死
         //不和注销共用是因为下线不是agent主观操作,可能被错误判罚,可以申诉解除,若使用注销逻辑信息被抹除
@@ -67,6 +67,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
     // ----------------------------
 
     //注册
+    /// @param stakeAmount 初始质押金额 (wei)
     event AgentRegistered(
         address indexed agentAddress,
         string did,
@@ -82,6 +83,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
     event ServiceUpdated(address indexed agentAddress, string newCid);
 
     //举报违规行为
+    /// @param timestamp 举报时间 ((格式)Unix时间戳, (单位)second)
     event MisbehaviorReported(
         address indexed reporter,
         address indexed targetAgent,
@@ -90,6 +92,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
     );
 
     //申诉 agentAddress是申诉方
+    /// @param timestamp 申诉时间 ((格式)Unix时间戳, (单位)second)
     event AgentAppealed(
         address indexed agentAddress,
         string evidenceCid,
@@ -97,6 +100,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
     );
 
     //罚没
+    /// @param slashedEthAmount 实际被罚没的 ETH 金额 (wei)
     event AgentSlashed(
         address indexed agentAddress,
         bool indexed slashed,
@@ -107,6 +111,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
     );
 
     // 恢复
+    /// @param newlastMisconductTimestamp 重置后的违规时间戳 ((格式)Unix时间戳, (单位)second)
     event AgentRestored(
         address indexed agentAddress,
         bool indexed slashed,
@@ -122,6 +127,8 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
     );
 
     //质押变更（增加或减少质押时触发，同时更新 initScore）
+    /// @param oldStake 变更前质押 (wei)
+    /// @param newStake 变更后质押 (wei)
     event StakeUpdated(
         address indexed agentAddress,
         uint256 oldStake,
@@ -241,6 +248,11 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
 
     /**
      * @dev 注册新 Agent（agent Admin 注册 & 质押）
+     * @param _did Agent 的去中心化标识符（DID）
+     * @param _cid Agent 的元数据 CID（指向 IPFS）
+     * @notice msg.value 为初始质押金额 (wei)
+     * @notice 质押 ETH 越多，初始信誉分越高（对数增长），但有上限
+     *一旦注册地址和DID一对一绑定,只有注销解除绑定,但注销后的DID不能再次注册,可以更换DID(即换agent)重新注册
      */
     function registerAgent(
         string calldata _did,
@@ -323,6 +335,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
 
     /**
      * @dev 增加质押，同时重算 initScore
+     * @notice msg.value 为新增质押金额 (wei)
      */
     function depositStake() external payable {
         require(agents[msg.sender].isRegistered, "Agent not registered");
@@ -350,6 +363,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
 
     /**
      * @dev 减少质押，同时重算 initScore
+     * @param _amount 减少的质押金额 (wei)
      * 注意：减持后的 sGlobal 不能低于 SCORE_MIN
      */
     function withdrawStake(uint256 _amount) external nonReentrant {
@@ -436,6 +450,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
 
     /**
      * @dev 治理罚没（仅 Governance 调用）
+     * @param _slashEth 计划罚没的 ETH 金额 (wei)，实际扣除金额可能小于此值（若余额不足）
      * - 信誉扣分：accumulatedPenalty += _penaltyScore
      * - 资金罚没：从 stakeAmount 扣减并转入 treasury
      *
@@ -508,6 +523,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
 
     /** * @dev 治理恢复 (与 slash 对应)
      * 用于给予被罚没节点申诉，通过治理委员会决定是否将其状态从 Slashed 恢复为正常。
+     * @param _resetlastMisconductTimestamp 重置后的违规时间戳 ((格式)Unix时间戳, (单位)second)
      * * 安全机制：
      * 1. 仅重置状态和部分信誉分。
      * 2. 不包含资金注入功能（防止凭空印钞漏洞）。

@@ -1,126 +1,160 @@
+# ============================================================
+# 事件实体（immutable）：链上事件的只读快照
+# id = txHash + logIndex，每条事件唯一
+# ============================================================
+
+# 申诉事件
 type AgentAppealed @entity(immutable: true) {
-  id: Bytes!
-  agentAddress: Bytes! # address
-  evidenceCid: String! # string
-  timestamp: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+  id: Bytes! # txHash + logIndex
+  agentAddress: Bytes! # 申诉方地址
+  evidenceCid: String! # 申诉证据 IPFS CID
+  timestamp: BigInt! # 合约 block.timestamp
+  blockNumber: BigInt!#事件区块高度
+  blockTimestamp: BigInt!#事件区块时间戳
+  transactionHash: Bytes!#交易哈希
 }
 
+# 注册事件
 type AgentRegistered @entity(immutable: true) {
-  id: Bytes!
-  agentAddress: Bytes! # address
-  did: String! # string
-  cid: String! # string
-  initScore: BigInt! # uint256
-  stakeAmount: BigInt! # uint256
+  id: Bytes! # txHash + logIndex
+  agentAddress: Bytes! # 注册者（admin）地址
+  did: String! # 绑定的 DID
+  cid: String! # 元数据 IPFS CID
+  initScore: BigInt! # 初始信誉分
+  stakeAmount: BigInt! # 质押金额（wei）
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# 恢复事件（治理者判罚失误恢复或部分恢复）
 type AgentRestored @entity(immutable: true) {
-  id: Bytes!
-  agentAddress: Bytes! # address
-  slashed: Boolean! # bool
-  newTotalPenalty: BigInt! # uint256
-  newlastMisconductTimestamp: BigInt! # uint256
-  reason: String! # string
+  id: Bytes! # txHash + logIndex
+  agentAddress: Bytes! # 被恢复的 agent 地址
+  slashed: Boolean! # 恢复后的罚死状态
+  newTotalPenalty: BigInt! # 重置后的累计罚分
+  newlastMisconductTimestamp: BigInt! # 重置后的违规时间戳
+  reason: String! # 恢复理由
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# 罚没事件
 type AgentSlashed @entity(immutable: true) {
-  id: Bytes!
-  agentAddress: Bytes! # address
-  slashed: Boolean! # bool
-  penaltyScore: BigInt! # uint256
-  newTotalPenalty: BigInt! # uint256
-  slashedEthAmount: BigInt! # uint256
-  reason: String! # string
+  id: Bytes! # txHash + logIndex
+  agentAddress: Bytes! # 被罚没的 agent 地址
+  slashed: Boolean! # 罚后是否被罚死
+  penaltyScore: BigInt! # 本次扣除的信誉分
+  newTotalPenalty: BigInt! # 罚后累计罚分（含结晶）
+  slashedEthAmount: BigInt! # 实际罚没的 ETH（wei）
+  reason: String! # 罚没理由
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# 注销事件
 type AgentUnregistered @entity(immutable: true) {
-  id: Bytes!
-  agentAddress: Bytes! # address
-  did: String! # string
+  id: Bytes! # txHash + logIndex
+  agentAddress: Bytes! # 注销者地址
+  did: String! # 被永久占用的 DID
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# 举报违规事件
 type MisbehaviorReported @entity(immutable: true) {
-  id: Bytes!
-  reporter: Bytes! # address
-  targetAgent: Bytes! # address
-  evidenceCid: String! # string
-  timestamp: BigInt! # uint256
+  id: Bytes! # txHash + logIndex
+  reporter: Bytes! # 举报人地址
+  targetAgent: Bytes! # 被举报的 agent 地址
+  evidenceCid: String! # 举报证据 IPFS CID
+  timestamp: BigInt! # 合约 block.timestamp
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# AccessControl：角色管理员变更
 type RoleAdminChanged @entity(immutable: true) {
-  id: Bytes!
-  role: Bytes! # bytes32
-  previousAdminRole: Bytes! # bytes32
-  newAdminRole: Bytes! # bytes32
+  id: Bytes! # txHash + logIndex
+  role: Bytes! # 角色标识
+  previousAdminRole: Bytes! # 旧管理员角色
+  newAdminRole: Bytes! # 新管理员角色
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# AccessControl：授予角色
 type RoleGranted @entity(immutable: true) {
-  id: Bytes!
-  role: Bytes! # bytes32
-  account: Bytes! # address
-  sender: Bytes! # address
+  id: Bytes! # txHash + logIndex
+  role: Bytes! # 角色标识
+  account: Bytes! # 被授权地址
+  sender: Bytes! # 操作者地址
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# AccessControl：撤销角色
 type RoleRevoked @entity(immutable: true) {
-  id: Bytes!
-  role: Bytes! # bytes32
-  account: Bytes! # address
-  sender: Bytes! # address
+  id: Bytes! # txHash + logIndex
+  role: Bytes! # 角色标识
+  account: Bytes! # 被撤销地址
+  sender: Bytes! # 操作者地址
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# 服务描述更新事件
 type ServiceUpdated @entity(immutable: true) {
-  id: Bytes!
-  agentAddress: Bytes! # address
-  newCid: String! # string
+  id: Bytes! # txHash + logIndex
+  agentAddress: Bytes! # agent 地址
+  newCid: String! # 新的元数据 IPFS CID
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# 质押变更事件（增加或减少质押）
 type StakeUpdated @entity(immutable: true) {
-  id: Bytes!
-  agentAddress: Bytes! # address
-  oldStake: BigInt! # uint256
-  newStake: BigInt! # uint256
-  oldInitScore: BigInt! # uint256
-  newInitScore: BigInt! # uint256
+  id: Bytes! # txHash + logIndex
+  agentAddress: Bytes! # agent 地址
+  oldStake: BigInt! # 变更前质押（wei）
+  newStake: BigInt! # 变更后质押（wei）
+  oldInitScore: BigInt! # 变更前初始信誉分
+  newInitScore: BigInt! # 变更后初始信誉分
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
 
+# 金库地址变更事件
 type TreasuryUpdated @entity(immutable: true) {
-  id: Bytes!
-  oldTreasury: Bytes! # address
-  newTreasury: Bytes! # address
+  id: Bytes! # txHash + logIndex
+  oldTreasury: Bytes! # 旧金库地址
+  newTreasury: Bytes! # 新金库地址
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+# ============================================================
+# Agent 聚合实体（mutable）：由事件驱动更新的当前状态
+# Sidecar 通过 lastUpdatedBlock 进行增量同步
+# ============================================================
+type Agent @entity {
+  id: ID! # agent admin 的以太坊地址（在使用状态下与 DID 一一绑定）
+  did: String! # 去中心化标识符 did:ethr:...
+  cid: String! # IPFS 元数据 CID（Service Metadata）
+  initScore: BigInt! # 初始信誉分 S_init
+  stakeAmount: BigInt! # 当前质押（wei）
+  accumulatedPenalty: BigInt! # 累计罚分 P_total（含结晶后的恢复抵消）
+  lastMisconductTimestamp: BigInt! # 上次违规时间戳 T_last
+  slashed: Boolean! # 是否被罚死
+  isRegistered: Boolean! # 是否在注册状态
+  lastUpdatedBlock: BigInt! # 最后变化区块号 (Block Number)，Sidecar 增量同步用
 }
