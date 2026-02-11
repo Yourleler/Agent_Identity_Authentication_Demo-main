@@ -146,7 +146,7 @@ type TreasuryUpdated @entity(immutable: true) {
 # Agent 聚合实体（mutable）：由事件驱动更新的当前状态
 # Sidecar 通过 lastUpdatedBlock 进行增量同步
 # ============================================================
-type Agent @entity {
+type Agent @entity(immutable: false) {
   id: ID! # agent admin 的以太坊地址（在使用状态下与 DID 一一绑定）
   did: String! # 去中心化标识符 did:ethr:...
   cid: String! # IPFS 元数据 CID（Service Metadata）
@@ -157,4 +157,19 @@ type Agent @entity {
   slashed: Boolean! # 是否被罚死
   isRegistered: Boolean! # 是否在注册状态
   lastUpdatedBlock: BigInt! # 最后变化区块号 (Block Number)，Sidecar 增量同步用
+}
+
+# ============================================================
+# 角色成员聚合实体（mutable）：追踪 AccessControl 角色的当前持有状态
+# 兼容 EOA / Gnosis Safe (Multi-sig) / Governor / Timelock 等任意地址类型
+# ============================================================
+type RoleMember @entity(immutable: false) {
+  id: ID!                       # role.toHex() + "-" + account.toHex()（复合键，同一地址可持有多个角色）
+  role: Bytes!                  # 角色标识（keccak256 哈希，保留原始值用于链上对账）
+  roleLabel: String!            # 人类可读标签："DEFAULT_ADMIN" | "GOVERNANCE" | 未知角色返回哈希前缀
+  account: Bytes!               # 角色持有者地址（EOA / Multi-sig / DAO Governor / Timelock 均可）
+  isActive: Boolean!            # 当前是否持有该角色（grant → true, revoke → false）
+  grantedAtBlock: BigInt!       # 首次授予时的区块号
+  grantedAtTimestamp: BigInt!   # 首次授予时间戳
+  lastUpdatedBlock: BigInt!     # 最后变化区块号，Sidecar 增量同步用
 }

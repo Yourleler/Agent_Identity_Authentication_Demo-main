@@ -5,7 +5,7 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: AgentRegistry_v1
+    name: AgentRegistry Sepolia
     network: sepolia
     source:
       address: "0x5e325877df7a15a67799544d1319aaf67ee8dfaf"
@@ -28,6 +28,8 @@ dataSources:
         - ServiceUpdated
         - StakeUpdated
         - TreasuryUpdated
+        - Agent
+        - RoleMember
       abis:
         - name: AgentRegistry_v1
           file: ./abis/AgentRegistry_v1.json

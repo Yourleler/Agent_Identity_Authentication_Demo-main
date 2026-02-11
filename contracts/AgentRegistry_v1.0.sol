@@ -237,7 +237,7 @@ contract AgentRegistry_v1 is AccessControl, ReentrancyGuard {
             SCORE_RECOVERY_RATE *
             int256(daysSinceLast);
 
-        if (sGlobal > int256(agent.initScore)) return agent.initScore;
+        if (sGlobal > int256(agent.initScore)) return agent.initScore;//最大S_init
         if (sGlobal < 0) return 0;
         return uint256(sGlobal);
     }
